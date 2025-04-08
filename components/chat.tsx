@@ -1,5 +1,4 @@
 'use client';
-
 import type { Attachment, UIMessage } from 'ai';
 import { useChat } from '@ai-sdk/react';
 import { useState } from 'react';
@@ -54,7 +53,8 @@ export function Chat({
     onError: () => {
       toast.error('An error occured, please try again!');
     },
-  });
+  })
+  const hasMessages = messages.some((m) => m.role !== "system");
 
   const { data: votes } = useSWR<Array<Vote>>(
     messages.length >= 2 ? `/api/vote?chatId=${id}` : null,

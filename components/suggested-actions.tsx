@@ -13,24 +13,24 @@ interface SuggestedActionsProps {
 function PureSuggestedActions({ chatId, append }: SuggestedActionsProps) {
   const suggestedActions = [
     {
-      title: 'What are the advantages',
-      label: 'of using Next.js?',
-      action: 'What are the advantages of using Next.js?',
+      title: 'What is the difference',
+      label: 'between reverse and bind shell?',
+      action: 'What is the difference between reverse and bind shell?',
     },
     {
-      title: 'Write code to',
-      label: `demonstrate djikstra's algorithm`,
-      action: `Write code to demonstrate djikstra's algorithm`,
+      title: 'Give me a checklist',
+      label: `for internal network recon`,
+      action: `Give me a checklist for internal network recon`,
     },
     {
-      title: 'Help me write an essay',
-      label: `about silicon valley`,
-      action: `Help me write an essay about silicon valley`,
+      title: 'Give me a tools list',
+      label: `for each step during Pen-Test`,
+      action: `Give me a tools list for each step during Pen-Test`,
     },
     {
-      title: 'What is the weather',
-      label: 'in San Francisco?',
-      action: 'What is the weather in San Francisco?',
+      title: 'How can I escalate privileges',
+      label: 'on a Windows 10 box?',
+      action: 'How can I escalate privileges on a Windows 10 box?',
     },
   ];
 
