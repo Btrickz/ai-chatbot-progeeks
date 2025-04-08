@@ -22,13 +22,14 @@ export function Chat({
   selectedVisibilityType,
   isReadonly,
 }: {
-  id: string;
+  id?: string;
   initialMessages: Array<UIMessage>;
   selectedChatModel: string;
   selectedVisibilityType: VisibilityType;
   isReadonly: boolean;
 }) {
   const { mutate } = useSWRConfig();
+  const [localId] = useState(() => id ?? generateUUID());
 
   const {
     messages,
@@ -41,8 +42,8 @@ export function Chat({
     stop,
     reload,
   } = useChat({
-    id,
-    body: { id, selectedChatModel: selectedChatModel },
+    id: localId,
+    body: { id: localId, selectedChatModel: selectedChatModel },
     initialMessages,
     experimental_throttle: 100,
     sendExtraMessageFields: true,
@@ -53,11 +54,11 @@ export function Chat({
     onError: () => {
       toast.error('An error occured, please try again!');
     },
-  })
-  const hasMessages = messages.some((m) => m.role !== "system");
+  });
+  const hasMessages = messages.some((m) => m.role !== 'system');
 
   const { data: votes } = useSWR<Array<Vote>>(
-    messages.length >= 2 ? `/api/vote?chatId=${id}` : null,
+    messages.length >= 2 ? `/api/vote?chatId=${localId}` : null,
     fetcher,
   );
 
@@ -68,14 +69,14 @@ export function Chat({
     <>
       <div className="flex flex-col min-w-0 h-dvh bg-background">
         <ChatHeader
-          chatId={id}
+          chatId={localId}
           selectedModelId={selectedChatModel}
           selectedVisibilityType={selectedVisibilityType}
           isReadonly={isReadonly}
         />
 
         <Messages
-          chatId={id}
+          chatId={localId}
           status={status}
           votes={votes}
           messages={messages}
@@ -88,7 +89,7 @@ export function Chat({
         <form className="flex mx-auto px-4 bg-background pb-4 md:pb-6 gap-2 w-full md:max-w-3xl">
           {!isReadonly && (
             <MultimodalInput
-              chatId={id}
+              chatId={localId}
               input={input}
               setInput={setInput}
               handleSubmit={handleSubmit}
@@ -105,7 +106,7 @@ export function Chat({
       </div>
 
       <Artifact
-        chatId={id}
+        chatId={localId}
         input={input}
         setInput={setInput}
         handleSubmit={handleSubmit}
