@@ -8,33 +8,15 @@ import { DataStreamHandler } from '@/components/data-stream-handler';
 export default async function Page() {
   const id = generateUUID();
   let modelId = DEFAULT_CHAT_MODEL;
-  const cookieStore = await cookies();
-  const modelIdFromCookie = cookieStore.get('chat-model');
 
   try {
     const cookieStore = await cookies();
     const modelIdFromCookie = cookieStore.get('chat-model');
-
     if (modelIdFromCookie) {
       modelId = modelIdFromCookie.value;
     }
   } catch (err) {
-    console.error('🚨 Failed to read cookies:', err);
-  }
-  if (!modelIdFromCookie) {
-    return (
-      <>
-        <Chat
-          key={id}
-          id={id}
-          initialMessages={[]}
-          selectedChatModel={DEFAULT_CHAT_MODEL}
-          selectedVisibilityType="private"
-          isReadonly={false}
-        />
-        <DataStreamHandler id={id} />
-      </>
-    );
+    console.error('🚨 Failed to get cookies:', err);
   }
 
   return (
