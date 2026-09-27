@@ -12,6 +12,7 @@
   <a href="#model-providers"><strong>Model Providers</strong></a> ·
   <a href="#deploy-your-own"><strong>Deploy Your Own</strong></a> ·
   <a href="#running-locally"><strong>Running locally</strong></a>
+  <!--this is a comment-->
 </p>
 <br/>
 
